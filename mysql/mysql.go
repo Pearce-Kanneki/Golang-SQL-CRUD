@@ -13,7 +13,9 @@ var db *sql.DB
 
 func main() {
 	initDB()
-	alterTable()
+	createDB(tableName)
+	createTable()
+	insert("aaa")
 	// db.Ping() // Ping() 這裡才開始建立連線
 }
 
@@ -81,7 +83,7 @@ func deleteTable() {
 
 // Insert
 func insert(v string) {
-	rs, err := db.Exec("INSERT INTO `test`.`table`(`name`) VALUES (?)", v)
+	rs, err := db.Exec("INSERT INTO `test`.`table`(`name`,`id`) VALUES (?, 1)", v)
 	if err != nil {
 		log.Fatalln(err)
 	}
